@@ -78,6 +78,20 @@ public class TieWenController {
         return tieWenService.deleteTiewenByBlock(blockName);
     }
 
+    /**
+     *
+     * 通过板块获取贴文
+     * @param null
+     * @return
+     * @author litind
+     **/
+    @GetMapping("/getTieByBlock")
+    @ApiOperation("获取某个板块的所有贴文")
+    public Result getTieByBlock(String blockName){
+        return tieWenService.getTieByBlock(blockName);
+    }
+
+
 
 
 }

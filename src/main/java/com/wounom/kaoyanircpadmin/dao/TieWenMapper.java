@@ -28,4 +28,7 @@ public interface TieWenMapper {
     int updateTieWenStatus(int tiewenId, int status);
     @Delete("delete from tiewen where blockName = #{blockName}")
     int deleteTiewenByBlock(String blockName);
+
+    @Select("select * from tiewen where blockName = #{blockName}")
+    List<Tiewen> getTieByBlock(String blockName);
 }

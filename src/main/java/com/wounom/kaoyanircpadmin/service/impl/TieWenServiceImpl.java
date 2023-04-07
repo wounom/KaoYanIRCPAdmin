@@ -97,4 +97,20 @@ public class TieWenServiceImpl implements TieWenService {
             return new Result(400,"清除失败,表内无该板块数据");
         }
     }
+    /**
+     *
+     * 通过板块名称获取贴文
+     * @param blockName
+     * @return
+     * @author litind
+     **/
+    @Override
+    public Result getTieByBlock(String blockName) {
+        List<Tiewen> tiewenList = tieWenMapper.getTieByBlock(blockName);
+        if (tiewenList.size()>0){
+            return new Result(200,"获取成功",tiewenList.size(),tiewenList);
+        }else{
+            return new Result(400,"获取失败,无该板块数据");
+        }
+    }
 }
