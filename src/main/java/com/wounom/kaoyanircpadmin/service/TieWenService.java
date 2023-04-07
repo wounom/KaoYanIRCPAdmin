@@ -2,6 +2,9 @@ package com.wounom.kaoyanircpadmin.service;
 
 
 import com.wounom.kaoyanircpadmin.entity.Result;
+import com.wounom.kaoyanircpadmin.entity.TiewenOfficial;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author litind
@@ -21,4 +24,6 @@ public interface TieWenService {
     Result getTieByBlock(int i,String blockName);
 
     Result deleteTiewenById(int i, int tiewenId);
+
+    Result pushOfficialTie(int i, TiewenOfficial tiewenOfficial, HttpServletRequest request);
 }

@@ -2,12 +2,15 @@ package com.wounom.kaoyanircpadmin.controller;
 
 
 import com.wounom.kaoyanircpadmin.entity.Result;
+import com.wounom.kaoyanircpadmin.entity.TiewenOfficial;
 import com.wounom.kaoyanircpadmin.service.TieWenService;
 import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author litind
@@ -100,6 +103,19 @@ public class TieWenController {
     @ApiOperation("通过帖子id删除帖子")
     public Result deleteTieByid(int i,int tiewenId){
         return tieWenService.deleteTiewenById(i,tiewenId);
+    }
+
+    /**
+     *
+     * 发布官方贴文
+     * @param
+     * @return
+     * @author litind
+     **/
+    @PostMapping("/pushOfTie")
+    @ApiOperation("发布官方帖子,传入i,title,content,blockName")
+    public Result pushOfficialTie(int i , TiewenOfficial tiewenOfficial, HttpServletRequest request){
+        return tieWenService.pushOfficialTie(i,tiewenOfficial,request);
     }
 
 }

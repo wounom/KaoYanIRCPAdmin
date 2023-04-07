@@ -20,7 +20,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Admin implements Serializable {
-	private Long id;
+	private Long adminId;
 
 	private String username;
 

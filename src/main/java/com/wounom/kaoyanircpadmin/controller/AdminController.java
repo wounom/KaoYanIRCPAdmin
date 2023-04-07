@@ -5,10 +5,7 @@ import com.wounom.kaoyanircpadmin.entity.FirstpagePush;
 import com.wounom.kaoyanircpadmin.entity.Result;
 import com.wounom.kaoyanircpadmin.service.AdminService;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -33,7 +30,7 @@ public class AdminController {
      * @return com.wounom.kaoyaniep.entity.Result
      * @author litind
      **/
-    @PostMapping("/login")
+    @GetMapping("/login")
     @ApiOperation("管理员登录")
     public Result login(HttpServletRequest request, Admin admin){
         if(!adminService.isAdminexsit(admin.getUsername())){

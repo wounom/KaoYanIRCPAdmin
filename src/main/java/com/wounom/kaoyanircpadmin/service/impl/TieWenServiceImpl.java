@@ -1,7 +1,9 @@
 package com.wounom.kaoyanircpadmin.service.impl;
 
 
+import cn.hutool.core.date.DateTime;
 import com.wounom.kaoyanircpadmin.dao.TieWenMapper;
+import com.wounom.kaoyanircpadmin.entity.Admin;
 import com.wounom.kaoyanircpadmin.entity.Result;
 import com.wounom.kaoyanircpadmin.entity.Tiewen;
 import com.wounom.kaoyanircpadmin.entity.TiewenOfficial;
@@ -9,6 +11,10 @@ import com.wounom.kaoyanircpadmin.service.TieWenService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.xml.crypto.Data;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -144,6 +150,37 @@ public class TieWenServiceImpl implements TieWenService {
         }else{
             return new Result(400,"删除失败");
         }
-
+    }
+    /**
+     *
+     * 发布官方贴文
+     * @param i,tiewenOfficial
+     * @return
+     * @author litind
+     **/
+    @Override
+    public Result pushOfficialTie(int i , TiewenOfficial tiewenOfficial, HttpServletRequest request) {
+        int r = 0;
+        if (i==0){//官方帖子
+            tiewenOfficial.setCreateTime(DateTime.now());
+            Admin admin = (Admin) request.getSession().getAttribute("admin");
+            Long id =admin.getAdminId();
+            tiewenOfficial.setAdminId(id);
+            r = tieWenMapper.insertTiewenOfficial(tiewenOfficial);
+        }else{
+            Tiewen tiewen = new Tiewen();
+            tiewen.setUserId(000L);
+            tiewen.setCreateTime(DateTime.now());
+            tiewen.setTitle(tiewenOfficial.getTitle());
+            tiewen.setContent(tiewenOfficial.getContent());
+            tiewen.setBlockName(tiewenOfficial.getBlockName());
+            tiewen.setStatus(1);
+            r = tieWenMapper.insertTiewen(tiewen);
+        }
+        if (r>0){
+            return new Result(200,"发布成功");
+        }else{
+            return new Result(400,"发布失败");
+        }
     }
 }

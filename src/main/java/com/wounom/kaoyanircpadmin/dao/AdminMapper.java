@@ -18,7 +18,7 @@ import org.apache.ibatis.annotations.Update;
 public interface AdminMapper extends BaseMapper {
 
     @Select("select * from admin where username = #{username}")
-    Admin selectAdminByUsername(String email);//获取库中已有的管理员账号
+    Admin selectAdminByUsername(String username);//获取库中已有的管理员账号
 
     @Insert("insert into admin(username,password,salt)"  +
             "values (#{username},#{password},#{salt})")

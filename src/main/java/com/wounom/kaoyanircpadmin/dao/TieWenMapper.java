@@ -3,10 +3,7 @@ package com.wounom.kaoyanircpadmin.dao;
 
 import com.wounom.kaoyanircpadmin.entity.Tiewen;
 import com.wounom.kaoyanircpadmin.entity.TiewenOfficial;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -39,4 +36,10 @@ public interface TieWenMapper {
     int deleteTieOfById();
     @Delete("delete from tiewen where tiewenId = #{tiewenId}")
     int deleteTieById(int tiewenId);
+
+    @Insert("insert into tiewen_official(adminID,title,createTime,content,blockName) values (#{adminId},#{title},#{createTime},#{content},#{blockName})")
+    int insertTiewenOfficial(TiewenOfficial tiewenOfficial);
+
+    @Insert("insert into tiewen(userId,title,createTime,content,blockName,status) values (#{userId},#{title},#{createTime},#{content},#{blockName},#{status})")
+    int insertTiewen(Tiewen tiewen);
 }
