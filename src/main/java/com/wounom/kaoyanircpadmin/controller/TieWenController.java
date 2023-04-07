@@ -81,14 +81,14 @@ public class TieWenController {
     /**
      *
      * 通过板块获取贴文
-     * @param null
+     * @param blockName,i
      * @return
      * @author litind
      **/
     @GetMapping("/getTieByBlock")
     @ApiOperation("获取某个板块的所有贴文")
-    public Result getTieByBlock(String blockName){
-        return tieWenService.getTieByBlock(blockName);
+    public Result getTieByBlock(int i,String blockName){
+        return tieWenService.getTieByBlock(i,blockName);
     }
 
 

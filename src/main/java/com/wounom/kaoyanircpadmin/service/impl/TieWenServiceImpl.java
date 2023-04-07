@@ -100,12 +100,13 @@ public class TieWenServiceImpl implements TieWenService {
     /**
      *
      * 通过板块名称获取贴文
-     * @param blockName
+     * @param blockName,i
      * @return
      * @author litind
      **/
     @Override
-    public Result getTieByBlock(String blockName) {
+    public Result getTieByBlock(int i,String blockName) {
+
         List<Tiewen> tiewenList = tieWenMapper.getTieByBlock(blockName);
         if (tiewenList.size()>0){
             return new Result(200,"获取成功",tiewenList.size(),tiewenList);

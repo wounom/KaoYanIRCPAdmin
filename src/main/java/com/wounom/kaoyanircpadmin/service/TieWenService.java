@@ -18,5 +18,5 @@ public interface TieWenService {
 
     Result deleteTiewenByBlock(String blockName);
 
-    Result getTieByBlock(String blockName);
+    Result getTieByBlock(int i,String blockName);
 }
