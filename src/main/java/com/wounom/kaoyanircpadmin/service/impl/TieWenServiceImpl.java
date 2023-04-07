@@ -4,6 +4,7 @@ package com.wounom.kaoyanircpadmin.service.impl;
 import com.wounom.kaoyanircpadmin.dao.TieWenMapper;
 import com.wounom.kaoyanircpadmin.entity.Result;
 import com.wounom.kaoyanircpadmin.entity.Tiewen;
+import com.wounom.kaoyanircpadmin.entity.TiewenOfficial;
 import com.wounom.kaoyanircpadmin.service.TieWenService;
 import org.springframework.stereotype.Service;
 
@@ -106,12 +107,43 @@ public class TieWenServiceImpl implements TieWenService {
      **/
     @Override
     public Result getTieByBlock(int i,String blockName) {
-
-        List<Tiewen> tiewenList = tieWenMapper.getTieByBlock(blockName);
-        if (tiewenList.size()>0){
-            return new Result(200,"获取成功",tiewenList.size(),tiewenList);
-        }else{
-            return new Result(400,"获取失败,无该板块数据");
+        if (i ==0){//查询的是特别专区
+            List<TiewenOfficial>  list = tieWenMapper.getTieOfByBlock(blockName);
+            if (list.size()>0){
+                return new Result(200,"获取成功",list.size(),list);
+            }else{
+                return new Result(400,"获取失败,无该板块数据");
+            }
         }
+        else {
+            List<Tiewen> list = tieWenMapper.getTieByBlock(blockName);
+            if (list.size()>0){
+                return new Result(200,"获取成功",list.size(),list);
+            }else{
+                return new Result(400,"获取失败,无该板块数据");
+            }
+        }
+    }
+    /**
+     *
+     * 管理员删除贴文
+     * @param i,tiewenId
+     * @return
+     * @author litind
+     **/
+    @Override
+    public Result deleteTiewenById(int i, int tiewenId) {
+        int r=0;
+        if (i == 0){//i=0时表示是官方贴文
+             r = tieWenMapper.deleteTieOfById();
+        }else {
+            r = tieWenMapper.deleteTieById(tiewenId);
+        }
+        if (r>0){
+            return new Result(200,"删除成功");
+        }else{
+            return new Result(400,"删除失败");
+        }
+
     }
 }

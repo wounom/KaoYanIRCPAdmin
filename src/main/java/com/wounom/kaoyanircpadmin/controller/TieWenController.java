@@ -4,10 +4,8 @@ package com.wounom.kaoyanircpadmin.controller;
 import com.wounom.kaoyanircpadmin.entity.Result;
 import com.wounom.kaoyanircpadmin.service.TieWenService;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.ibatis.annotations.Delete;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -91,7 +89,17 @@ public class TieWenController {
         return tieWenService.getTieByBlock(i,blockName);
     }
 
-
-
+    /**
+     *
+     * 通过贴文id删除贴文
+     * @param i,tiewenId
+     * @return
+     * @author litind
+     **/
+    @DeleteMapping("/deleteByid")
+    @ApiOperation("通过帖子id删除帖子")
+    public Result deleteTieByid(int i,int tiewenId){
+        return tieWenService.deleteTiewenById(i,tiewenId);
+    }
 
 }

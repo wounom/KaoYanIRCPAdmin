@@ -2,6 +2,7 @@ package com.wounom.kaoyanircpadmin.dao;
 
 
 import com.wounom.kaoyanircpadmin.entity.Tiewen;
+import com.wounom.kaoyanircpadmin.entity.TiewenOfficial;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -31,4 +32,11 @@ public interface TieWenMapper {
 
     @Select("select * from tiewen where blockName = #{blockName}")
     List<Tiewen> getTieByBlock(String blockName);
+    @Select("select * from tiewen_official where blockName = #{blockName}")
+    List<TiewenOfficial> getTieOfByBlock(String blockName);
+
+    @Delete("delete from tiewen_official where tiewenID = #{tiewenId}")
+    int deleteTieOfById();
+    @Delete("delete from tiewen where tiewenId = #{tiewenId}")
+    int deleteTieById(int tiewenId);
 }
