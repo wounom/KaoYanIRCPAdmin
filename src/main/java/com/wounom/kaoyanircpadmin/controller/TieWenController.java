@@ -50,6 +50,33 @@ public class TieWenController {
         //过审为1
         return tieWenService.checkTiewen(tiewenId,status);
     }
+    /**
+     *
+     * 获取用户发帖
+     * @param userId
+     * @return
+     * @author litind
+     **/
+    @PostMapping("/getTiewenByUserid")
+    @ApiOperation("通过用户id获取帖子")
+    public Result GetTieWenByUser(int userId/*HttpServletRequest request*/){
+        /*User user = (User) request.getSession().getAttribute("user");
+        int userId = (int) user.getId();*/
+        return tieWenService.getTiewenByUser(userId);
+    }
+
+    /**
+     *
+     * 管理员删除板块的同时删除板块内数据
+     * @param blockName
+     * @return
+     * @author litind
+     **/
+    @PostMapping("/deleteByBlock")
+    @ApiOperation("删除板块时，同时删除板块数据")
+    public Result deleteTiewenByBlock(String blockName){
+        return tieWenService.deleteTiewenByBlock(blockName);
+    }
 
 
 

@@ -13,4 +13,8 @@ public interface TieWenService {
     Result getCheckTiewen();
 
     Result checkTiewen(int tiewenId, int status);
+
+    Result getTiewenByUser(int userId);
+
+    Result deleteTiewenByBlock(String blockName);
 }
