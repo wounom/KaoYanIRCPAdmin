@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author litind
@@ -45,8 +47,8 @@ public class TieWenController {
      * @author litind
      **/
     @PostMapping("/checktiewen")
-    @ApiOperation("审核推文")
-    public Result CheckTiewen(int tiewenId,int status){
+    @ApiOperation("审核推文 tiewenId status")
+    public Result CheckTiewen(@RequestParam("tiewenId") int tiewenId,@RequestParam("status") int status){
         //删除为-1
         //过审为1
         return tieWenService.checkTiewen(tiewenId,status);
@@ -58,7 +60,7 @@ public class TieWenController {
      * @return
      * @author litind
      **/
-    @PostMapping("/getTiewenByUserid")
+    @GetMapping("/getTiewenByUserid")
     @ApiOperation("通过用户id获取帖子")
     public Result GetTieWenByUser(int userId/*HttpServletRequest request*/){
         /*User user = (User) request.getSession().getAttribute("user");
@@ -75,7 +77,7 @@ public class TieWenController {
      **/
     @PostMapping("/deleteByBlock")
     @ApiOperation("删除板块时，同时删除板块数据")
-    public Result deleteTiewenByBlock(String blockName){
+    public Result deleteTiewenByBlock(@RequestParam("blockName") String blockName){
         return tieWenService.deleteTiewenByBlock(blockName);
     }
 
@@ -99,22 +101,26 @@ public class TieWenController {
      * @return
      * @author litind
      **/
-    @DeleteMapping("/deleteByid")
-    @ApiOperation("通过帖子id删除帖子")
-    public Result deleteTieByid(int i,int tiewenId){
+    @DeleteMapping("/deleteByid/{i}/{tiewenId}")
+    @ApiOperation("通过帖子id删除帖子 i,tiewenId")
+    public Result deleteTieByid(/*@RequestBody Map<String,Object> map*/@RequestParam(value = "i")int i,@RequestParam("tiewenId") int tiewenId){
+        /*int i = (int) map.get("i");
+        int tiewenId = (int) map.get("tiewenId");*/
         return tieWenService.deleteTiewenById(i,tiewenId);
     }
 
     /**
      *
      * 发布官方贴文
-     * @param
+     * @param i,tiewenOfficial
      * @return
      * @author litind
      **/
     @PostMapping("/pushOfTie")
     @ApiOperation("发布官方帖子,传入i,title,content,blockName")
-    public Result pushOfficialTie(int i , TiewenOfficial tiewenOfficial, HttpServletRequest request){
+    public Result pushOfficialTie(@RequestBody TiewenOfficial tiewenOfficial,@RequestParam("i")int i, HttpServletRequest request){
+        /*int i = (int) map.get("i");
+        TiewenOfficial tiewenOfficial = (TiewenOfficial) map.get("tiewenOfficial");*/
         return tieWenService.pushOfficialTie(i,tiewenOfficial,request);
     }
 

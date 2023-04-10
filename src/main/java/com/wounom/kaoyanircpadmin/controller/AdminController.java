@@ -1,5 +1,7 @@
 package com.wounom.kaoyanircpadmin.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.wounom.kaoyanircpadmin.entity.Admin;
 import com.wounom.kaoyanircpadmin.entity.FirstpagePush;
 import com.wounom.kaoyanircpadmin.entity.Result;
@@ -10,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author litind
@@ -32,7 +36,7 @@ public class AdminController {
      **/
     @GetMapping("/login")
     @ApiOperation("管理员登录")
-    public Result login(HttpServletRequest request, Admin admin){
+    public Result login(HttpServletRequest request,@RequestBody Admin admin){
         if(!adminService.isAdminexsit(admin.getUsername())){
             return new Result(400,"账号不存在,或不是管理员账号");
         }
@@ -53,9 +57,10 @@ public class AdminController {
      * @return
      * @author litind
      **/
+
     @PostMapping("/newAdmin")
     @ApiOperation("新建管理员")
-    public Result newAdmin(Admin admin){
+    public Result newAdmin(@RequestBody Admin admin){
         if(adminService.isAdminexsit(admin.getUsername())){
             return new Result(400,"管理员账号已存在");
         }
@@ -72,7 +77,7 @@ public class AdminController {
      **/
     @PostMapping("/resetadmin")
     @ApiOperation("修改管理员密码")
-    public  Result updateAdmin(Admin admin){
+    public  Result updateAdmin(@RequestBody Admin admin){
         if(!adminService.isAdminexsit(admin.getUsername())){
             return new Result(400,"管理员账号不存在");
         }
@@ -87,7 +92,7 @@ public class AdminController {
      **/
     @PostMapping("/Fppush")
     @ApiOperation("上传首页推送")
-    public Result updateFpagePush(FirstpagePush firstpagePush, MultipartFile file, HttpServletRequest request){
+    public Result updateFpagePush(@RequestBody FirstpagePush firstpagePush, MultipartFile file, HttpServletRequest request){
         if (file.isEmpty()){
             return new Result(400,"图片为空");
         }
@@ -101,8 +106,10 @@ public class AdminController {
      * @author litind
      **/
     @PostMapping("/deletepush")
-    @ApiOperation("重置首页推送")
-    public Result resetFpagePush(int first_Id){
+    @ApiOperation("重置首页推送(first_Id)")
+    public Result resetFpagePush(@RequestParam(value = "first_Id") int first_Id){
+        /*JSONObject json = JSON.parseObject(String.valueOf(first_Id));
+        first_Id = (Integer) json.get("first_Id");*/
         return adminService.deleteFpp(first_Id);
     }
 
