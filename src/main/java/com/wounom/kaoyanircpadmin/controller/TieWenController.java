@@ -123,5 +123,4 @@ public class TieWenController {
         TiewenOfficial tiewenOfficial = (TiewenOfficial) map.get("tiewenOfficial");*/
         return tieWenService.pushOfficialTie(i,tiewenOfficial,request);
     }
-
 }
