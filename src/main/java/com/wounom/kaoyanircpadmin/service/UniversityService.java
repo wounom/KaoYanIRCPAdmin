@@ -15,4 +15,10 @@ import java.io.IOException;
  */
 public interface UniversityService {
     Result insertUniversity(University university, MultipartFile file, HttpServletRequest request);
+
+    Result deletUniveristyById(Long universityId);
+
+    Result getUniversityByDistrict(String universityDistrict);
+
+    Result update(University university, MultipartFile file,HttpServletRequest request);
 }

@@ -57,4 +57,72 @@ public class UniversityServiceImpl implements UniversityService {
             }
         }
     }
+    /**
+     *
+     * 通过地区获取学校信息
+     * @param universityDistrict
+     * @return
+     * @author litind
+     **/
+    @Override
+    public Result getUniversityByDistrict(String universityDistrict) {
+        List<University> universities = universityMapper.getByDistrict(universityDistrict);
+        if (universities.isEmpty()){
+            return new Result(400,"该地区不存在或地区暂无院校信息");
+        }else {
+            return new Result(200,"获取成功",universities.size(),universities);
+        }
+    }
+
+    /**
+     *
+     * 删除院校信息
+     * @param universityId
+     * @return
+     * @author litind
+     **/
+    @Override
+    public Result deletUniveristyById(Long universityId) {
+        int r = universityMapper.deleteById(universityId);
+        if (r>0){
+            return new Result(200,"删除成功");
+        }else {
+            return new Result(400, "删除失败");
+        }
+    }
+    /**
+     *
+     * 更新院校信息
+     * @param university,file
+     * @return
+     * @author litind
+     **/
+    @Override
+    public Result update(University university, MultipartFile file,HttpServletRequest request) {
+        Long id = university.getUniversityId();
+        University university1 = universityMapper.getById(id);
+        String image = university1.getImage();
+        if (!file.isEmpty()){//图片存在的时候更新图片
+            //先将本地存储的图片删除
+            String[] str = image.split("/");
+            String fileName = str[str.length-1];
+            String filePath = imgPath+fileName;
+            FileUtil.deleteFile(filePath);
+            //再将新图片存入本地
+            try {
+                String newFile =  FileUtil.saveFile(file,imgPath);
+                String url = request.getScheme()+"://172.25.94.245:"+request.getServerPort() +"/images/university/"+newFile;
+                university.setImage(url);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        //更新学校信息
+        int r = universityMapper.update(university);
+        if (r>0){
+            return new Result(200,"更新成功");
+        }else {
+            return new Result(400, "更新失败");
+        }
+    }
 }

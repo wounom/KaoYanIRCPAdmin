@@ -5,10 +5,8 @@ import com.wounom.kaoyanircpadmin.entity.University;
 import com.wounom.kaoyanircpadmin.service.UniversityService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -27,14 +25,52 @@ public class UniversityController {
     /**
      *
      * 根据地区新增院校
-     * @param university
+     * @param university,file,request
      * @return
      * @author litind
      **/
     @PostMapping("/input")
     @ApiOperation("管理员新增院校")
+    @ResponseBody
     public Result inputUniversity(@RequestBody University university, MultipartFile file, HttpServletRequest request){
         return universityService.insertUniversity(university,file,request);
+    }
+    /**
+     *
+     * 通过地区获取院校
+     * @param universityDistrict
+     * @return
+     * @author litind
+     **/
+    @GetMapping("/get")
+    @ApiOperation("通过地区获取学校")
+    @ResponseBody
+    public Result OutputUniversity(@RequestParam(value = "universityDistrict") String universityDistrict){
+        return universityService.getUniversityByDistrict(universityDistrict);
+    }
+    /**
+     *
+     * 删除院校
+     * @param universityId
+     * @return
+     * @author litind
+     **/
+    @DeleteMapping("/delete")
+    @ApiOperation("删除院校")
+    public Result deleteUniversit(@RequestParam(value = "universityId") Long universityId){
+        return universityService.deletUniveristyById(universityId);
+    }
+    /**
+     *
+     * 修改院校信息
+     * @param
+     * @return
+     * @author litind
+     **/
+    @PutMapping("/update")
+    @ApiOperation("更新院校信息(修改后的信息与universityId)")
+    public Result updateUniversity(@RequestParam(value = "university")University university, MultipartFile file,HttpServletRequest request){
+        return universityService.update(university,file,request);
     }
 
 }
