@@ -15,6 +15,7 @@ public class fileConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry){
         registry.addResourceHandler("/images/firstpage/**").addResourceLocations("file:"+imgPath+"firstpage/");
+        registry.addResourceHandler("/images/university/**").addResourceLocations("file:"+imgPath+"university/");
     }
 
 }
