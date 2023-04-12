@@ -14,5 +14,5 @@ import java.io.IOException;
  * @date 2023/4/12 18:00
  */
 public interface UniversityService {
-    Result insertUniversity(University university, MultipartFile file, HttpServletRequest request) throws IOException;
+    Result insertUniversity(University university, MultipartFile file, HttpServletRequest request);
 }

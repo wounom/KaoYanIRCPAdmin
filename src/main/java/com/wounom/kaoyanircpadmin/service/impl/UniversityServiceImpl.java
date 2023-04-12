@@ -32,14 +32,19 @@ public class UniversityServiceImpl implements UniversityService {
      * @author litind
      **/
     @Override
-    public Result insertUniversity(University university, MultipartFile file, HttpServletRequest request) throws IOException {
+    public Result insertUniversity(University university, MultipartFile file, HttpServletRequest request) {
         //通过院校名称查询院校
         University university1 = universityMapper.getByName(university.getUniversityName());
         if (university1!=null){
             return new Result(400,"院校已存在");
         }else {
             //保存院校图片信息
-            String newFn = FileUtil.saveFile(file,imgPath);
+            String newFn = null;
+            try {
+                newFn = FileUtil.saveFile(file,imgPath);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             String url = request.getScheme()+"://172.25.94.245:"+request.getServerPort() +"/images/university/"+newFn;
             /*String Path = imgPath+newFn;*///todo:应当增加一个文件路径的字段，以便日后更新信息时删除文件
             university.setImage(url);
