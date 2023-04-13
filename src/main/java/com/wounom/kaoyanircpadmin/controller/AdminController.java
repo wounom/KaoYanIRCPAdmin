@@ -75,7 +75,7 @@ public class AdminController {
      * @return
      * @author litind
      **/
-    @PostMapping("/resetadmin")
+    @PostMapping("/resetpwd")
     @ApiOperation("修改管理员密码")
     public  Result updateAdmin(@RequestBody Admin admin){
         if(!adminService.isAdminexsit(admin.getUsername())){

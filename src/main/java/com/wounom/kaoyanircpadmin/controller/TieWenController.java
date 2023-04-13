@@ -34,7 +34,7 @@ public class TieWenController {
      * @return
      * @author litind
      **/
-    @GetMapping("/getCheckTiewen")
+    @GetMapping("/getCheck")
     @ApiOperation("获取需要审核的贴文")
     public Result getCheckTiewen(){
         return tieWenService.getCheckTiewen();
@@ -46,7 +46,7 @@ public class TieWenController {
      * @return
      * @author litind
      **/
-    @PostMapping("/checktiewen")
+    @PostMapping("/checkt")
     @ApiOperation("审核推文 tiewenId status")
     public Result CheckTiewen(@RequestParam("tiewenId") int tiewenId,@RequestParam("status") int status){
         //删除为-1
@@ -60,7 +60,7 @@ public class TieWenController {
      * @return
      * @author litind
      **/
-    @GetMapping("/getTiewenByUserid")
+    @GetMapping("/getByUserid")
     @ApiOperation("通过用户id获取帖子")
     public Result GetTieWenByUser(int userId/*HttpServletRequest request*/){
         /*User user = (User) request.getSession().getAttribute("user");
@@ -88,7 +88,7 @@ public class TieWenController {
      * @return
      * @author litind
      **/
-    @GetMapping("/getTieByBlock")
+    @GetMapping("/getByBlock")
     @ApiOperation("获取某个板块的所有贴文")
     public Result getTieByBlock(int i,String blockName){
         return tieWenService.getTieByBlock(i,blockName);
@@ -102,7 +102,7 @@ public class TieWenController {
      * @author litind
      **/
     @DeleteMapping("/deleteByid/{i}/{tiewenId}")
-    @ApiOperation("通过帖子id删除帖子 i,tiewenId")
+    @ApiOperation("通过帖子id删除帖子 (i=0时表示是官方贴文)i,tiewenId")
     public Result deleteTieByid(/*@RequestBody Map<String,Object> map*/@RequestParam(value = "i")int i,@RequestParam("tiewenId") int tiewenId){
         /*int i = (int) map.get("i");
         int tiewenId = (int) map.get("tiewenId");*/
@@ -117,7 +117,7 @@ public class TieWenController {
      * @author litind
      **/
     @PostMapping("/pushOfTie")
-    @ApiOperation("发布官方帖子,传入i,title,content,blockName")
+    @ApiOperation("发布官方帖子,传入(i=0时表示是官方贴文)i,title,content,blockName")
     public Result pushOfficialTie(@RequestBody TiewenOfficial tiewenOfficial,@RequestParam("i")int i, HttpServletRequest request){
         /*int i = (int) map.get("i");
         TiewenOfficial tiewenOfficial = (TiewenOfficial) map.get("tiewenOfficial");*/

@@ -1,10 +1,7 @@
 package com.wounom.kaoyanircpadmin.dao;
 
 import com.wounom.kaoyanircpadmin.entity.University;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -13,6 +10,7 @@ import java.util.List;
  * @version 1.0
  * @date 2023/4/12 18:00
  */
+@Mapper
 public interface UniversityMapper {
     @Select("select * from university where universityName = #{universityName}")
     University getByName(String universityName);

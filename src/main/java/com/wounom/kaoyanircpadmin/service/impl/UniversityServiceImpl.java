@@ -6,6 +6,7 @@ import com.wounom.kaoyanircpadmin.entity.University;
 import com.wounom.kaoyanircpadmin.service.UniversityService;
 import com.wounom.kaoyanircpadmin.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -18,6 +19,7 @@ import java.util.List;
  * @version 1.0
  * @date 2023/4/12 18:00
  */
+@Service
 public class UniversityServiceImpl implements UniversityService {
     @Resource
     private UniversityMapper universityMapper;

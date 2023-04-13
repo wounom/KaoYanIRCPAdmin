@@ -16,6 +16,7 @@ import java.util.Objects;
  * @date 2023/4/7 8:21
  */
 @RestController
+@RequestMapping("/block")
 public class BlockController {
     @Resource
     private BlockService blockService;
@@ -26,7 +27,7 @@ public class BlockController {
      * @return
      * @author litind
      **/
-    @GetMapping("/getBlock")
+    @GetMapping("/getall")
     @ApiOperation("管理员：板块管理，获取板块列表")
     public Result getBlock(){
        return blockService.getBlock();
@@ -39,7 +40,7 @@ public class BlockController {
      * @return
      * @author litind
      **/
-    @DeleteMapping("/deleteBlock")
+    @DeleteMapping("/delete")
     @ApiOperation("删除板块，记得去TiewenController删除板块内数据(status ,blockName)")
     public Result deleteBlock(@RequestParam("status") int status,@RequestParam("blockName") String blockName){
         if(status == 1 || status == 2){
