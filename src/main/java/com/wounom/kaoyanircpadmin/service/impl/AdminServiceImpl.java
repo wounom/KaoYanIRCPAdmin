@@ -9,6 +9,7 @@ import com.wounom.kaoyanircpadmin.entity.Result;
 import com.wounom.kaoyanircpadmin.service.AdminService;
 import com.wounom.kaoyanircpadmin.utils.FileUtil;
 import com.wounom.kaoyanircpadmin.utils.PasswordUtil;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -87,12 +88,14 @@ public class AdminServiceImpl implements AdminService {
      * @return
      * @author litind
      **/
+    @Value("${file.upload-path-firstpage}/")
+    private String path;
     @Override
     public  Result updateFpp(FirstpagePush firstpagePush, MultipartFile file, HttpServletRequest request){
-        String path="D:/JAVA/Project/KaoYanIRCPAdmin/images/firstpage/";
+        /*String path="D:/JAVA/Project/KaoYanIRCPAdmin/images/firstpage/";*/
         try {
             String newFn = FileUtil.saveFile(file,path);
-            String url = request.getScheme()+"://172.25.94.249:"+request.getServerPort() +"/images/firstpage/"+newFn;
+            String url = request.getScheme()+"://43.138.194.191:"+request.getServerPort() +"/images/firstpage/"+newFn;
             String imgPath = path+newFn;
             firstpagePush.setCreate_Time(DateTime.now());
             firstpagePush.setImage(url);

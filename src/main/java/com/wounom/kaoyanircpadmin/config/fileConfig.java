@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class fileConfig implements WebMvcConfigurer {
-    private String imgPath="D:/JAVA/Project/KaoYanIRCPAdmin/images/";
+    private String imgPath="/usr/JAVA/Project/KaoYanIRCPAdmin/images/";
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry){
         registry.addResourceHandler("/images/firstpage/**").addResourceLocations("file:"+imgPath+"firstpage/");
