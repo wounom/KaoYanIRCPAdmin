@@ -92,7 +92,7 @@ public class AdminServiceImpl implements AdminService {
         String path="D:/JAVA/Project/KaoYanIRCPAdmin/images/firstpage/";
         try {
             String newFn = FileUtil.saveFile(file,path);
-            String url = request.getScheme()+"://172.25.94.245:"+request.getServerPort() +"/images/firstpage/"+newFn;
+            String url = request.getScheme()+"://172.25.94.249:"+request.getServerPort() +"/images/firstpage/"+newFn;
             String imgPath = path+newFn;
             firstpagePush.setCreate_Time(DateTime.now());
             firstpagePush.setImage(url);
