@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace:名称空间
+-->
+<mapper namespace="com.wounom.kaoyanircpadmin.mapper.TieWenMapper">
+    <!--userGenerateKeys属性:开启某个字段的值的递增
+        keyProperty:标签将表中的哪个字段作为主键递增
+        resultType
+        resultMap: 当表的
+    -->
+    <select id="getTieWenbyUserId" resultType="com.wounom.kaoyanircpadmin.entity.Tiewen">
+        select * from tiewen where userId = #{userId}
+    </select>
+    
+    <select id="getCheckTiewen" resultType="com.wounom.kaoyanircpadmin.entity.Tiewen">
+        select * from tiewen where status = 0
+    </select>
+    
+    <update id="updateTieWenStatus">
+        update tiewen set status = #{status} where tiewenId = #{tiewenId}
+    </update>
+    
+    <delete id="deleteTiewenByBlock">
+        delete from tiewen where blockName = #{blockName}
+    </delete>
+    
+    <select id="getTieByBlock" resultType="com.wounom.kaoyanircpadmin.entity.Tiewen">
+        select * from tiewen where blockName = #{blockName}
+    </select>
+    
+    <select id="getTieOfByBlock" resultType="com.wounom.kaoyanircpadmin.entity.TiewenOfficial">
+        select * from tiewen_official where blockName = #{blockName}
+    </select>
+    
+    <delete id="deleteTieOfById">
+        delete from tiewen_official where tiewenID = #{tiewenId}
+    </delete>
+
+    <delete id="deleteTieById">
+        delete from tiewen where tiewenId = #{tiewenId}
+    </delete>
+
+    <insert id="insertTiewenOfficial">
+        insert into tiewen_official(adminID,title,createTime,content,blockName) values (#{adminId},#{title},#{createTime},#{content},#{blockName})
+    </insert>
+
+    <insert id="insertTiewen">
+        insert into tiewen(userId,title,createTime,content,blockName,status) values (#{userId},#{title},#{createTime},#{content},#{blockName},#{status})
+    </insert>
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace:名称空间
+-->
+<mapper namespace="com.wounom.kaoyanircpadmin.mapper.AdminMapper">
+    <!--userGenerateKeys属性:开启某个字段的值的递增
+        keyProperty:标签将表中的哪个字段作为主键递增
+        resultType
+        resultMap: 当表的
+    -->
+    <select id="selectAdminByUsername" resultType="com.wounom.kaoyanircpadmin.entity.Admin">
+        select * from admin where username = #{username}
+    </select>
+
+    <insert id="insertAdmin">
+        insert into admin(username,password,salt) values (#{username},#{password},#{salt})
+    </insert>
+
+    <update id="updateAdmin">
+        update admin set password = #{password},salt = #{salt} where username = #{username}
+    </update>
+
+    <update id="updateFpp">
+        update firstpage_push set title = #{title},create_time = #{create_Time},URL = #{url}, imagepath = #{imagePath}, image = #{image} where first_id = #{first_Id}
+    </update>
+
+    <update id="deleteFppById">
+        update firstpage_push set title = null,create_time =null ,URL = null, image = null, imagepath = null where first_id = #{first_Id}
+    </update>
+
+    <select id="selectFppById" resultType="com.wounom.kaoyanircpadmin.entity.FirstpagePush">
+        select * from firstpage_push where first_id = #{first_Id}
+    </select>
+</mapper>

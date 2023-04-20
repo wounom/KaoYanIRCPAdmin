@@ -50,6 +50,11 @@ public class AdminController {
             return new Result(400,"用户名或密码错误");
         }
     }
+
+    @GetMapping("/test")
+    public Admin test(String username){
+        return adminService.getAdminByUsername(username);
+    }
     /**
      *
      * 运维增加管理员
@@ -99,6 +104,7 @@ public class AdminController {
         }
         return adminService.updateFpp(firstpagePush,file,request);
     }
+
     /**
      *
      * 重置首页推送（删除）
@@ -108,7 +114,7 @@ public class AdminController {
      **/
     @PostMapping("/deletepush")
     @ApiOperation("重置首页推送(first_Id)")
-    public Result resetFpagePush(@RequestParam(value = "first_Id") int first_Id){
+    public Result resetFpagePush(int first_Id){
         /*JSONObject json = JSON.parseObject(String.valueOf(first_Id));
         first_Id = (Integer) json.get("first_Id");*/
         return adminService.deleteFpp(first_Id);

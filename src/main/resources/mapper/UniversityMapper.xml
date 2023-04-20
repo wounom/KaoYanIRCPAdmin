@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace:名称空间
+-->
+<mapper namespace="com.wounom.kaoyanircpadmin.mapper.UniversityMapper">
+    <!--userGenerateKeys属性:开启某个字段的值的递增
+        keyProperty:标签将表中的哪个字段作为主键递增
+        resultType
+        resultMap: 当表的
+    -->
+    <select id="getByName" resultType="com.wounom.kaoyanircpadmin.entity.University">
+        select * from university where universityName = #{universityName}
+    </select>
+
+    <insert id="insert">
+        insert into university(universityName,universityIntroduce,universityDistrict,universityHigherup,ifDouble,ifGraduate,ifIndependent,image,officialnet,address,post,phone)
+            values(#{universityName},#{universityIntroduce},#{universityDistrict},#{universityHigherup},#{ifDouble},#{ifGraduate},#{ifIndependent},#{image},#{officialnet},#{address},#{post},#{phone})
+    </insert>
+
+    <delete id="deleteById">
+        delete from university where universityId = #{universityId}
+    </delete>
+
+    <select id="getByDistrict" resultType="com.wounom.kaoyanircpadmin.entity.University">
+        select * from university where universityDistrict = #{universityDistrict}
+    </select>
+
+    <select id="getById" resultType="com.wounom.kaoyanircpadmin.entity.University">
+        select * from university where universityId = #{universityId}
+    </select>
+
+    <update id="update">
+        update university set universityName=#{universityName},universityIntroduce=#{universityIntroduce},universityDistrict=#{universityDistrict},universityHigherup=#{universityHigherup},ifDouble=#{ifDouble},ifGraduate=#{ifGraduate},ifIndependent=#{ifIndependent},
+            image=#{image},officialnet=#{officialnet},address=#{address},post=#{post},phone=#{phone} where universityId = #{universityId}
+    </update>
+</mapper>

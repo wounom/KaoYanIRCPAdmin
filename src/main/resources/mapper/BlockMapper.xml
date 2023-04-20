@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace:名称空间
+-->
+<mapper namespace="com.wounom.kaoyanircpadmin.mapper.BlockMapper">
+    <!--userGenerateKeys属性:开启某个字段的值的递增
+        keyProperty:标签将表中的哪个字段作为主键递增
+        resultType
+        resultMap: 当表的
+    -->
+    <select id="getBlock" resultType="com.wounom.kaoyanircpadmin.entity.Block">
+        select * from block
+    </select>
+
+    <delete id="deleteBlock">
+        delete from block where blockName = #{blockName}
+    </delete>
+</mapper>

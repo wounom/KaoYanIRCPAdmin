@@ -138,7 +138,7 @@ public class TieWenServiceImpl implements TieWenService {
     public Result deleteTiewenById(int i, int tiewenId) {
         int r=0;
         if (i == 0){//i=0时表示是官方贴文
-             r = tieWenMapper.deleteTieOfById();
+             r = tieWenMapper.deleteTieOfById(tiewenId);
         }else {
             r = tieWenMapper.deleteTieById(tiewenId);
         }
