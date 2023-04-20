@@ -1,4 +1,4 @@
-package com.wounom.kaoyanircpadmin.dao;
+package com.wounom.kaoyanircpadmin.mapper;
 
 
 import com.wounom.kaoyanircpadmin.entity.Tiewen;

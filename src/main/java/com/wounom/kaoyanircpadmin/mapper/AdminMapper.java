@@ -1,6 +1,5 @@
-package com.wounom.kaoyanircpadmin.dao;
+package com.wounom.kaoyanircpadmin.mapper;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 import com.wounom.kaoyanircpadmin.entity.Admin;
 import com.wounom.kaoyanircpadmin.entity.FirstpagePush;
@@ -15,7 +14,7 @@ import org.apache.ibatis.annotations.Update;
  * @date 2023/4/2 9:56
  */
 @Mapper
-public interface AdminMapper extends BaseMapper {
+public interface AdminMapper{
 
     @Select("select * from admin where username = #{username}")
     Admin selectAdminByUsername(String username);//获取库中已有的管理员账号

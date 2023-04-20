@@ -7,6 +7,7 @@ import com.wounom.kaoyanircpadmin.entity.Result;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 /**
  * @author litind
@@ -24,7 +25,7 @@ public interface AdminService {
 
     Result updateAdmin(Admin admin);
 
-    Result updateFpp(FirstpagePush firstpagePush, MultipartFile file, HttpServletRequest request);
+    Result updateFpp(FirstpagePush firstpagePush, MultipartFile file, HttpServletRequest request) throws IOException;
 
     Result deleteFpp(int firstId);
 

@@ -2,7 +2,7 @@ package com.wounom.kaoyanircpadmin.service.impl;
 
 
 import cn.hutool.core.date.DateTime;
-import com.wounom.kaoyanircpadmin.dao.TieWenMapper;
+import com.wounom.kaoyanircpadmin.mapper.TieWenMapper;
 import com.wounom.kaoyanircpadmin.entity.Admin;
 import com.wounom.kaoyanircpadmin.entity.Result;
 import com.wounom.kaoyanircpadmin.entity.Tiewen;
@@ -12,9 +12,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.crypto.Data;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 /**

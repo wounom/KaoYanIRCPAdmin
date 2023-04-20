@@ -9,9 +9,8 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 @SpringBootApplication
 @EnableTransactionManagement
 @EnableOpenApi
-@MapperScan("com.wounom.kaoyanircpadmin.dao")
+@MapperScan("com.wounom.kaoyanircpadmin.mapper")
 public class KaoYanIrcpAdminApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(KaoYanIrcpAdminApplication.class, args);
     }

@@ -4,6 +4,7 @@ package com.wounom.kaoyanircpadmin.controller;
 import com.wounom.kaoyanircpadmin.entity.Result;
 import com.wounom.kaoyanircpadmin.service.BlockService;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -18,7 +19,7 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/block")
 public class BlockController {
-    @Resource
+    @Autowired
     private BlockService blockService;
     /**
      *

@@ -1,5 +1,6 @@
 package com.wounom.kaoyanircpadmin.utils;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -29,7 +30,7 @@ public class FileUtil {
             dir.mkdir();
         }
         File file1 = new File(path,newFileName);
-        file.transferTo(file1);
+        FileUtils.copyInputStreamToFile(file.getInputStream(), file1);
         return newFileName;
     }
     /**

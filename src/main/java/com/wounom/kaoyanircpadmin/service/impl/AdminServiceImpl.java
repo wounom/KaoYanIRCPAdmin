@@ -2,7 +2,7 @@ package com.wounom.kaoyanircpadmin.service.impl;
 
 import cn.hutool.core.date.DateTime;
 
-import com.wounom.kaoyanircpadmin.dao.AdminMapper;
+import com.wounom.kaoyanircpadmin.mapper.AdminMapper;
 import com.wounom.kaoyanircpadmin.entity.Admin;
 import com.wounom.kaoyanircpadmin.entity.FirstpagePush;
 import com.wounom.kaoyanircpadmin.entity.Result;
@@ -91,9 +91,8 @@ public class AdminServiceImpl implements AdminService {
     @Value("${file.upload-path-firstpage}/")
     private String path;
     @Override
-    public  Result updateFpp(FirstpagePush firstpagePush, MultipartFile file, HttpServletRequest request){
+    public  Result updateFpp(FirstpagePush firstpagePush, MultipartFile file, HttpServletRequest request) throws IOException {
         /*String path="D:/JAVA/Project/KaoYanIRCPAdmin/images/firstpage/";*/
-        try {
             String newFn = FileUtil.saveFile(file,path);
             String url = request.getScheme()+"://43.138.194.191:"+request.getServerPort() +"/images/firstpage/"+newFn;
             String imgPath = path+newFn;
@@ -102,9 +101,7 @@ public class AdminServiceImpl implements AdminService {
             firstpagePush.setImagePath(imgPath);
             adminMapper.updateFpp(firstpagePush);
             return new Result(200,url);
-        } catch (IOException e) {
-            return new Result(400,"上传失败"+e.getMessage());
-        }
+
     }
     /**
      *

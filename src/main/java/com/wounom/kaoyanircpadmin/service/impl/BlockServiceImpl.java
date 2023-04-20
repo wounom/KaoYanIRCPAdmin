@@ -1,13 +1,14 @@
 package com.wounom.kaoyanircpadmin.service.impl;
 
 
-import com.wounom.kaoyanircpadmin.dao.BlockMapper;
+
+import com.wounom.kaoyanircpadmin.mapper.BlockMapper;
 import com.wounom.kaoyanircpadmin.entity.Block;
 import com.wounom.kaoyanircpadmin.entity.Result;
 import com.wounom.kaoyanircpadmin.service.BlockService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -17,10 +18,11 @@ import java.util.List;
  */
 @Service
 public class BlockServiceImpl implements BlockService {
-    @Resource
+    @Autowired
     private BlockMapper blockMapper;
     @Override
     public Result getBlock() {
+
         List<Block> blockList =  blockMapper.getBlock();
         if(blockList.size()>0){
             return new Result(200,"获取成功",blockList.size(),blockList);

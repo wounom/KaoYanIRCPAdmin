@@ -10,7 +10,7 @@ public class Result {
 
     private Integer code = 0;
     private String message;
-    private Integer count = 0;
+    private long count = 0L;
     private Object data;
 
     public Integer getCode() {
@@ -29,7 +29,7 @@ public class Result {
         this.message = message;
     }
 
-    public Integer getCount() {
+    public long getCount() {
         return count;
     }
 
@@ -45,7 +45,7 @@ public class Result {
         this.data = data;
     }
 
-    public Result(Integer code, String message, Integer count, Object data) {
+    public Result(Integer code, String message, long count, Object data) {
         this.code = code;
         this.message = message;
         this.count = count;

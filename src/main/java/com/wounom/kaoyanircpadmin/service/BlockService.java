@@ -1,6 +1,7 @@
 package com.wounom.kaoyanircpadmin.service;
 
 
+
 import com.wounom.kaoyanircpadmin.entity.Result;
 
 /**

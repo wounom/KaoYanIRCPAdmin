@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.Map;
 import java.util.Objects;
 
@@ -91,8 +92,8 @@ public class AdminController {
      * @author litind
      **/
     @PostMapping("/Fppush")
-    @ApiOperation("上传首页推送")
-    public Result updateFpagePush(@RequestBody FirstpagePush firstpagePush, MultipartFile file, HttpServletRequest request){
+    @ApiOperation("上传首页推送 first_Id,url,file,title")
+    public Result updateFpagePush(FirstpagePush firstpagePush,MultipartFile file, HttpServletRequest request) throws IOException {
         if (file.isEmpty()){
             return new Result(400,"图片为空");
         }

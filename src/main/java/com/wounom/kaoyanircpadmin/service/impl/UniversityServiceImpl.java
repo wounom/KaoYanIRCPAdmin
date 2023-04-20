@@ -1,6 +1,6 @@
 package com.wounom.kaoyanircpadmin.service.impl;
 
-import com.wounom.kaoyanircpadmin.dao.UniversityMapper;
+import com.wounom.kaoyanircpadmin.mapper.UniversityMapper;
 import com.wounom.kaoyanircpadmin.entity.Result;
 import com.wounom.kaoyanircpadmin.entity.University;
 import com.wounom.kaoyanircpadmin.service.UniversityService;
