@@ -67,9 +67,9 @@ public class UniversityController {
      * @return
      * @author litind
      **/
-    @PutMapping("/update")
+    @PostMapping("/update")
     @ApiOperation("更新院校信息(修改后的信息与universityId)")
-    public Result updateUniversity(@RequestParam(value = "university")University university, MultipartFile file,HttpServletRequest request){
+    public Result updateUniversity(University university,MultipartFile file,HttpServletRequest request){
         return universityService.update(university,file,request);
     }
 

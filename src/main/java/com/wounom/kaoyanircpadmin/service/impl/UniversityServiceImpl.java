@@ -105,11 +105,13 @@ public class UniversityServiceImpl implements UniversityService {
         University university1 = universityMapper.getById(id);
         String image = university1.getImage();
         if (!file.isEmpty()){//图片存在的时候更新图片
-            //先将本地存储的图片删除
-            String[] str = image.split("/");
-            String fileName = str[str.length-1];
-            String filePath = imgPath+fileName;
-            FileUtil.deleteFile(filePath);
+            if (image!=null) {
+                //先将本地存储的图片删除
+                String[] str = image.split("/");
+                String fileName = str[str.length - 1];
+                String filePath = imgPath + fileName;
+                FileUtil.deleteFile(filePath);
+            }
             //再将新图片存入本地
             try {
                 String newFile =  FileUtil.saveFile(file,imgPath);

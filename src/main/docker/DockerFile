@@ -1,0 +1,5 @@
+FROM openjdk:8
+VOLUME /tmp
+ADD KaoYanIRCPAdmin-0.0.1-SNAPSHOT.jar /adminapp.jar
+EXPOSE 8080/tcp
+ENTRYPOINT java -Djava.security.egd=file:/dev/./urandom -jar /adminapp.jar

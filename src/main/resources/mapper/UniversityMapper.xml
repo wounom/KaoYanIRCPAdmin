@@ -32,8 +32,47 @@
         select * from university where universityId = #{universityId}
     </select>
 
-    <update id="update">
-        update university set universityName=#{universityName},universityIntroduce=#{universityIntroduce},universityDistrict=#{universityDistrict},universityHigherup=#{universityHigherup},ifDouble=#{ifDouble},ifGraduate=#{ifGraduate},ifIndependent=#{ifIndependent},
-            image=#{image},officialnet=#{officialnet},address=#{address},post=#{post},phone=#{phone} where universityId = #{universityId}
+
+    <update id="update" parameterType="com.wounom.kaoyanircpadmin.entity.University">
+        update university
+        <set>
+            <if test="universityName != null">
+                universityName=#{universityName},
+            </if>
+            <if test="universityIntroduce != null">
+                universityIntroduce=#{universityIntroduce},
+            </if>
+            <if test="universityDistrict != null">
+                universityDistrict=#{universityDistrict},
+            </if>
+            <if test="universityHigherup != null">
+                universityHigherup=#{universityHigherup},
+            </if>
+            <if test="ifDouble != null">
+                ifDouble=#{ifDouble},
+            </if>
+            <if test="ifGraduate != null">
+                ifGraduate=#{ifGraduate},
+            </if>
+            <if test="ifIndependent != null">
+                ifIndependent=#{ifIndependent},
+            </if>
+            <if test="image != null">
+                image=#{image},
+            </if>
+            <if test="officialnet != null">
+                officialnet=#{officialnet},
+            </if>
+            <if test="address != null">
+                address=#{address},
+            </if>
+            <if test="post != null">
+                post=#{post},
+            </if>
+            <if test="phone != null">
+                phone=#{phone},
+            </if>
+        </set>
+        where universityId = #{universityId}
     </update>
 </mapper>

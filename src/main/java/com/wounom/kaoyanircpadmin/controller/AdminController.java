@@ -51,10 +51,6 @@ public class AdminController {
         }
     }
 
-    @GetMapping("/test")
-    public Admin test(String username){
-        return adminService.getAdminByUsername(username);
-    }
     /**
      *
      * 运维增加管理员
