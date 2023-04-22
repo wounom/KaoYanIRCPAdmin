@@ -88,13 +88,21 @@ public class AdminServiceImpl implements AdminService {
      * @return
      * @author litind
      **/
-    @Value("${file.upload-path-firstpage}/")
+    @Value("${file.upload-path-firstpage}")
     private String path;
     @Override
     public  Result updateFpp(FirstpagePush firstpagePush, MultipartFile file, HttpServletRequest request) throws IOException {
         /*String path="D:/JAVA/Project/KaoYanIRCPAdmin/images/firstpage/";*/
+        FirstpagePush fp = adminMapper.selectFppById(firstpagePush.getFirst_Id());
+        if (fp.getImage()!=null) {
+            //先将本地存储的图片删除
+            String[] str = fp.getImage().split("/");
+            String fileName = str[str.length - 1];
+            String filePath = path + fileName;
+            FileUtil.deleteFile(filePath);
+        }
             String newFn = FileUtil.saveFile(file,path);
-            String url = request.getScheme()+"://43.138.194.191:"+request.getServerPort() +"/images/firstpage/"+newFn;
+            String url = request.getScheme()+"://172.25.94.249:"+request.getServerPort() +"/images/firstpage/"+newFn;
             String imgPath = path+newFn;
             firstpagePush.setCreate_Time(DateTime.now());
             firstpagePush.setImage(url);

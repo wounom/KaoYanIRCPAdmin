@@ -115,7 +115,7 @@ public class UniversityServiceImpl implements UniversityService {
             //再将新图片存入本地
             try {
                 String newFile =  FileUtil.saveFile(file,imgPath);
-                String url = request.getScheme()+"://43.138.194.191:"+request.getServerPort() +"/images/university/"+newFile;
+                String url = request.getScheme()+"://172.25.94.249:"+request.getServerPort() +"/images/university/"+newFile;
                 university.setImage(url);
             } catch (IOException e) {
                 throw new RuntimeException(e);
