@@ -8,6 +8,7 @@ import com.wounom.kaoyanircpadmin.entity.Result;
 import com.wounom.kaoyanircpadmin.entity.Tiewen;
 import com.wounom.kaoyanircpadmin.entity.TiewenOfficial;
 import com.wounom.kaoyanircpadmin.service.TieWenService;
+import com.wounom.kaoyanircpadmin.utils.TokenUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -160,7 +161,8 @@ public class TieWenServiceImpl implements TieWenService {
         int r = 0;
         if (i==0){//官方帖子
             tiewenOfficial.setCreateTime(DateTime.now());
-            Admin admin = (Admin) request.getSession().getAttribute("admin");
+            String token = request.getHeader("token");
+            Admin admin = TokenUtils.getAdmin(token);
             Long id =admin.getAdminId();
             tiewenOfficial.setAdminId(id);
             r = tieWenMapper.insertTiewenOfficial(tiewenOfficial);

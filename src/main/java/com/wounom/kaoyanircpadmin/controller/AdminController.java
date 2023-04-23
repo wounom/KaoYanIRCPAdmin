@@ -6,6 +6,7 @@ import com.wounom.kaoyanircpadmin.entity.Admin;
 import com.wounom.kaoyanircpadmin.entity.FirstpagePush;
 import com.wounom.kaoyanircpadmin.entity.Result;
 import com.wounom.kaoyanircpadmin.service.AdminService;
+import com.wounom.kaoyanircpadmin.utils.TokenUtils;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -37,15 +39,19 @@ public class AdminController {
      **/
     @GetMapping("/login")
     @ApiOperation("管理员登录")
-    public Result login(HttpServletRequest request,@RequestBody Admin admin){
+    public Result login(/*HttpServletRequest request,*/@RequestBody Admin admin){
+        Map<String,Object> map = new HashMap<>();
         if(!adminService.isAdminexsit(admin.getUsername())){
             return new Result(400,"账号不存在,或不是管理员账号");
         }
         Admin newadmin = adminService.getAdminByUsername(admin.getUsername());//查询已经注册的该邮箱账户
         if(adminService.loginCheck(admin,newadmin)){
-            request.getSession().setAttribute("admin",newadmin);
-            request.getSession().setMaxInactiveInterval(1800);
-            return new Result(200,"登录成功");
+            String token = TokenUtils.CreateToken(newadmin);
+            map.put("token",token);
+            map.put("admin",newadmin);
+            /*request.getSession().setAttribute("admin",newadmin);
+            request.getSession().setMaxInactiveInterval(1800);*/
+            return new Result(200,"登录成功",map.size(),map);
         }else {
             return new Result(400,"用户名或密码错误");
         }
