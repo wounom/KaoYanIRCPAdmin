@@ -47,8 +47,8 @@ public class UniversityServiceImpl implements UniversityService {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            String url = request.getScheme()+"://172.25.94.249:"+request.getServerPort() +"/images/university/"+newFn;
-            /*String Path = imgPath+newFn;*///todo:应当增加一个文件路径的字段，以便日后更新信息时删除文件
+            String url = request.getScheme()+"://172.25.94.249:8080"+"/images/university/"+newFn;
+            /*String Path = imgPath+newFn;*/
             university.setImage(url);
             //插入院校信息
             int r =  universityMapper.insert(university);
@@ -115,7 +115,7 @@ public class UniversityServiceImpl implements UniversityService {
             //再将新图片存入本地
             try {
                 String newFile =  FileUtil.saveFile(file,imgPath);
-                String url = request.getScheme()+"://172.25.94.249:"+request.getServerPort() +"/images/university/"+newFile;
+                String url = request.getScheme()+"://172.25.94.249:8080"+"/images/university/"+newFile;
                 university.setImage(url);
             } catch (IOException e) {
                 throw new RuntimeException(e);

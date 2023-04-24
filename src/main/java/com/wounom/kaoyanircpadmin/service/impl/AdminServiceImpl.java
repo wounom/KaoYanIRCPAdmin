@@ -102,7 +102,7 @@ public class AdminServiceImpl implements AdminService {
             FileUtil.deleteFile(filePath);
         }
             String newFn = FileUtil.saveFile(file,path);
-            String url = request.getScheme()+"://172.25.94.249:"+request.getServerPort() +"/images/firstpage/"+newFn;
+            String url = request.getScheme()+"://172.25.94.249:8080"+"/images/firstpage/"+newFn;
             String imgPath = path+newFn;
             firstpagePush.setCreate_Time(DateTime.now());
             firstpagePush.setImage(url);
