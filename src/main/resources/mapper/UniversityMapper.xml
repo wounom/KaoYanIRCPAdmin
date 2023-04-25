@@ -17,7 +17,10 @@
 
     <insert id="insert">
         insert into university(universityName,universityIntroduce,universityDistrict,universityHigherup,ifDouble,ifGraduate,ifIndependent,image,officialnet,address,post,phone)
-            values(#{universityName},#{universityIntroduce},#{universityDistrict},#{universityHigherup},#{ifDouble},#{ifGraduate},#{ifIndependent},#{image},#{officialnet},#{address},#{post},#{phone})
+            values(#{universityName},#{universityIntroduce},#{universityDistrict},
+                   #{universityHigherup},#{ifDouble},#{ifGraduate},
+                   #{ifIndependent},#{image},#{officialnet}
+                   ,#{address},#{post},#{phone})
     </insert>
 
     <delete id="deleteById">
