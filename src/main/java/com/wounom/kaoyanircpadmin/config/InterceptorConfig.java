@@ -20,8 +20,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry){
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/admin/login","/admin/logout","/admin/regist","/admin/forgetpw")
-                .excludePathPatterns("/firstpage/**","/images/firstpage/**")
+                .excludePathPatterns("/admin/login","/admin/newAdmin","/admin/resetpwd")
+                .excludePathPatterns("/firstpage/**","/images/**")
                 .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v3/**","/v2/**", "/swagger-ui/**");
     }*/
     //todo:项目完成后加上拦截器

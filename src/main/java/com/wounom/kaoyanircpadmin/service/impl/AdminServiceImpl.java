@@ -36,6 +36,11 @@ public class AdminServiceImpl implements AdminService {
         return adminMapper.selectAdminByUsername(username);
     }
 
+    @Value("${file.upload-path-firstpage}")
+    private String path;
+    @Value("${file.upload-ip}")
+    private String ip;
+
     @Override
     public Boolean loginCheck(Admin admin,Admin newadmin){
         String cpw = PasswordUtil.md5Pwd(admin.getPassword(),newadmin.getSalt());
@@ -88,8 +93,7 @@ public class AdminServiceImpl implements AdminService {
      * @return
      * @author litind
      **/
-    @Value("${file.upload-path-firstpage}")
-    private String path;
+
     @Override
     public  Result updateFpp(FirstpagePush firstpagePush, MultipartFile file, HttpServletRequest request) throws IOException {
         /*String path="D:/JAVA/Project/KaoYanIRCPAdmin/images/firstpage/";*/
@@ -102,13 +106,13 @@ public class AdminServiceImpl implements AdminService {
             FileUtil.deleteFile(filePath);
         }
             String newFn = FileUtil.saveFile(file,path);
-            String url = request.getScheme()+"://172.25.94.249:8080"+"/images/firstpage/"+newFn;
+            String url = request.getScheme()+"://"+ip+"/images/firstpage/"+newFn;
             String imgPath = path+newFn;
             firstpagePush.setCreate_Time(DateTime.now());
             firstpagePush.setImage(url);
             firstpagePush.setImagePath(imgPath);
             adminMapper.updateFpp(firstpagePush);
-            return new Result(200,url);
+            return new Result(200,"上传成功",1,url);
 
     }
 

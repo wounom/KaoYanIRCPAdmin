@@ -2,6 +2,7 @@ package com.wounom.kaoyanircpadmin.controller;
 
 
 import com.wounom.kaoyanircpadmin.entity.Result;
+import com.wounom.kaoyanircpadmin.entity.Tiewen;
 import com.wounom.kaoyanircpadmin.entity.TiewenOfficial;
 import com.wounom.kaoyanircpadmin.service.TieWenService;
 import io.swagger.annotations.ApiOperation;
@@ -42,13 +43,15 @@ public class TieWenController {
     /**
      *
      * 审核管理
-     * @param status
+     * @param tiewen
      * @return
      * @author litind
      **/
-    @PostMapping("/checkt")
+    @PostMapping("/check")
     @ApiOperation("审核推文 tiewenId status")
-    public Result CheckTiewen(@RequestParam("tiewenId") int tiewenId,@RequestParam("status") int status){
+    public Result CheckTiewen(@RequestBody Tiewen tiewen){
+        Long tiewenId = tiewen.getTiewenId();
+        int status = tiewen.getStatus();
         //删除为-1
         //过审为1
         return tieWenService.checkTiewen(tiewenId,status);
@@ -60,13 +63,13 @@ public class TieWenController {
      * @return
      * @author litind
      **/
-    @GetMapping("/getByUserid")
+    /*@GetMapping("/getByUserid")
     @ApiOperation("通过用户id获取帖子")
-    public Result GetTieWenByUser(int userId/*HttpServletRequest request*/){
-        /*User user = (User) request.getSession().getAttribute("user");
-        int userId = (int) user.getId();*/
+    public Result GetTieWenByUser(int userId*//*HttpServletRequest request*//*){
+        *//*User user = (User) request.getSession().getAttribute("user");
+        int userId = (int) user.getId();*//*
         return tieWenService.getTiewenByUser(userId);
-    }
+    }*/
 
     /**
      *

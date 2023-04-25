@@ -19,7 +19,7 @@ public interface TieWenMapper {
     List<Tiewen> getTieWenbyUserId(long id);
 
     List<Tiewen> getCheckTiewen();
-    int updateTieWenStatus(int tiewenId, int status);
+    int updateTieWenStatus(@Param(value = "tiewenId") Long tiewenId,@Param(value = "status") int status);
     int deleteTiewenByBlock(String blockName);
 
     List<Tiewen> getTieByBlock(String blockName);

@@ -37,7 +37,7 @@ public class AdminController {
      * @return com.wounom.kaoyaniep.entity.Result
      * @author litind
      **/
-    @GetMapping("/login")
+    @PostMapping("/login")
     @ApiOperation("管理员登录")
     public Result login(/*HttpServletRequest request,*/@RequestBody Admin admin){
         Map<String,Object> map = new HashMap<>();
@@ -49,8 +49,6 @@ public class AdminController {
             String token = TokenUtils.CreateToken(newadmin);
             map.put("token",token);
             map.put("admin",newadmin);
-            /*request.getSession().setAttribute("admin",newadmin);
-            request.getSession().setMaxInactiveInterval(1800);*/
             return new Result(200,"登录成功",map.size(),map);
         }else {
             return new Result(400,"用户名或密码错误");
@@ -91,6 +89,7 @@ public class AdminController {
         }
         return adminService.updateAdmin(admin);
     }
+
     /**
      *
      * 上传首页推送
@@ -100,7 +99,7 @@ public class AdminController {
      **/
     @PostMapping("/Fppush")
     @ApiOperation("上传首页推送 first_Id,url,file,title")
-    public Result updateFpagePush(FirstpagePush firstpagePush,MultipartFile file, HttpServletRequest request) throws IOException {
+    public Result updateFpagePush(@RequestPart("firstpagePush") FirstpagePush firstpagePush,@RequestPart("file")  MultipartFile file, HttpServletRequest request) throws IOException {
         if (file.isEmpty()){
             return new Result(400,"图片为空");
         }
@@ -116,7 +115,7 @@ public class AdminController {
      **/
     @PostMapping("/deletepush")
     @ApiOperation("重置首页推送(first_Id)")
-    public Result resetFpagePush(int first_Id){
+    public Result resetFpagePush(@RequestParam(value = "first_Id") int first_Id){
         /*JSONObject json = JSON.parseObject(String.valueOf(first_Id));
         first_Id = (Integer) json.get("first_Id");*/
         return adminService.deleteFpp(first_Id);

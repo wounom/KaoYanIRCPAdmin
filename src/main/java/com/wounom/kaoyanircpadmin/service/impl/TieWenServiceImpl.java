@@ -50,10 +50,11 @@ public class TieWenServiceImpl implements TieWenService {
      **/
 
     @Override
-    public Result checkTiewen(int tiewenId,int status) {
+    public Result checkTiewen(Long tiewenId,int status) {
         //拒绝为-1
         if(status <0){
            int r= tieWenMapper.updateTieWenStatus(tiewenId,status);
+
            if (r >0){
                return new Result(200,"拒绝成功");
            }else {
@@ -102,6 +103,8 @@ public class TieWenServiceImpl implements TieWenService {
             return new Result(400,"清除失败,表内无该板块数据");
         }
     }
+
+
     /**
      *
      * 通过板块名称获取贴文

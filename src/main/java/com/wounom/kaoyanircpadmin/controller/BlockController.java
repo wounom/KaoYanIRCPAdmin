@@ -29,7 +29,7 @@ public class BlockController {
      * @author litind
      **/
     @GetMapping("/getall")
-    @ApiOperation("管理员：板块管理，获取板块列表")
+    @ApiOperation("管理员获取：板块管理，获取板块列表")
     public Result getBlock(){
        return blockService.getBlock();
     }

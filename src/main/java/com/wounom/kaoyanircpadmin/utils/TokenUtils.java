@@ -38,8 +38,20 @@ public class TokenUtils {
         }catch (Exception e){
             e.printStackTrace();
         }
-        tokenMap.put(token,admin);
+        saveAdmin(token,admin);
         return token;
+    }
+
+    //缓存已经登录的账户
+    static void saveAdmin(String token,Admin admin){
+        Admin a = tokenMap.get(token);
+        if (a==null){
+            tokenMap.put(token,admin);
+        }else {
+            //当用户重新登录的时候，先将缓存中的token去掉，再存入新的token
+            tokenMap.remove(token);
+            tokenMap.put(token,admin);
+        }
     }
 
     // TOKEN 验证
@@ -69,8 +81,8 @@ public class TokenUtils {
                 .build();
         DecodedJWT decodedJWT = jwtVerifier.verify(token);
         User user = (User) decodedJWT.getClaim("user");*/
-        Admin admin1 = tokenMap.get(token);
-        return admin1;
+        Admin admin = tokenMap.get(token);
+        return admin;
     }
 
 
