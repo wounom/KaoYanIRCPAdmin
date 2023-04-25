@@ -114,7 +114,7 @@ public class TieWenServiceImpl implements TieWenService {
      **/
     @Override
     public Result getTieByBlock(int i,String blockName) {
-        if (i ==0){//查询的是特别专区
+        if (i ==0){//查询的是官方贴
             List<TiewenOfficial>  list = tieWenMapper.getTieOfByBlock(blockName);
             if (list.size()>0){
                 return new Result(200,"获取成功",list.size(),list);

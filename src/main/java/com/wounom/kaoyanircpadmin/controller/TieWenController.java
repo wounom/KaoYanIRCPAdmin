@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.Objects;
@@ -78,11 +79,12 @@ public class TieWenController {
      * @return
      * @author litind
      **/
-    @PostMapping("/deleteByBlock")
+    @DeleteMapping("/deleteByBlock")
     @ApiOperation("删除板块时，同时删除板块数据")
     public Result deleteTiewenByBlock(@RequestParam("blockName") String blockName){
         return tieWenService.deleteTiewenByBlock(blockName);
     }
+
 
     /**
      *
@@ -93,7 +95,7 @@ public class TieWenController {
      **/
     @GetMapping("/getByBlock")
     @ApiOperation("获取某个板块的所有贴文")
-    public Result getTieByBlock(int i,String blockName){
+    public Result getTieByBlock(@RequestParam("i") int i,@RequestParam("blockName") String blockName){
         return tieWenService.getTieByBlock(i,blockName);
     }
 
@@ -104,7 +106,7 @@ public class TieWenController {
      * @return
      * @author litind
      **/
-    @DeleteMapping("/deleteByid/{i}/{tiewenId}")
+    @DeleteMapping("/deleteByid")
     @ApiOperation("通过帖子id删除帖子 (i=0时表示是官方贴文)i,tiewenId")
     public Result deleteTieByid(/*@RequestBody Map<String,Object> map*/@RequestParam(value = "i")int i,@RequestParam("tiewenId") int tiewenId){
         /*int i = (int) map.get("i");
@@ -115,13 +117,18 @@ public class TieWenController {
     /**
      *
      * 发布官方贴文
-     * @param i,tiewenOfficial
+     * @param ofMap
      * @return
      * @author litind
      **/
     @PostMapping("/pushOfTie")
     @ApiOperation("发布官方帖子,传入(i=0时表示是官方贴文)i,title,content,blockName")
-    public Result pushOfficialTie(@RequestBody TiewenOfficial tiewenOfficial,@RequestParam("i")int i, HttpServletRequest request){
+    public Result pushOfficialTie( @RequestBody Map<String,Object> ofMap, HttpServletRequest request){
+        TiewenOfficial tiewenOfficial = new TiewenOfficial();
+        tiewenOfficial.setTitle((String) ofMap.get("title"));
+        tiewenOfficial.setContent((String) ofMap.get("content"));
+        tiewenOfficial.setBlockName((String) ofMap.get("blockName"));
+        int i = (int) ofMap.get("i");
         /*int i = (int) map.get("i");
         TiewenOfficial tiewenOfficial = (TiewenOfficial) map.get("tiewenOfficial");*/
         return tieWenService.pushOfficialTie(i,tiewenOfficial,request);

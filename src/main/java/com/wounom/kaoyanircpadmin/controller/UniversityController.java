@@ -32,7 +32,7 @@ public class UniversityController {
     @PostMapping("/input")
     @ApiOperation("管理员新增院校")
     @ResponseBody
-    public Result inputUniversity(@RequestBody University university, MultipartFile file, HttpServletRequest request){
+    public Result inputUniversity(@RequestPart("university") University university,@RequestPart("file") MultipartFile file, HttpServletRequest request){
         return universityService.insertUniversity(university,file,request);
     }
     /**
@@ -42,7 +42,7 @@ public class UniversityController {
      * @return
      * @author litind
      **/
-    @GetMapping("/get")
+    @GetMapping("/getByDistrict")
     @ApiOperation("通过地区获取学校")
     @ResponseBody
     public Result OutputUniversity(@RequestParam(value = "universityDistrict") String universityDistrict){
@@ -69,8 +69,7 @@ public class UniversityController {
      **/
     @PostMapping("/update")
     @ApiOperation("更新院校信息(修改后的信息与universityId)")
-    public Result updateUniversity(University university,@RequestPart(required = false) MultipartFile file,HttpServletRequest request){
+    public Result updateUniversity(@RequestPart("university") University university,@RequestPart(value = "file",required = false) MultipartFile file,HttpServletRequest request){
         return universityService.update(university,file,request);
     }
-
 }

@@ -106,6 +106,9 @@ public class UniversityServiceImpl implements UniversityService {
     public Result update(University university, MultipartFile file,HttpServletRequest request) {
         Long id = university.getUniversityId();
         University university1 = universityMapper.getById(id);
+        if (university1==null){
+            return new Result(400,"学校不存在");
+        }
         String image = university1.getImage();
         if (file!=null){//图片存在的时候更新图片
             if (image!=null) {
