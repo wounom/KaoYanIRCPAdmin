@@ -99,10 +99,11 @@ public class AdminController {
      **/
     @PostMapping("/Fppush")
     @ApiOperation("上传首页推送 first_Id,url,file,title")
-    public Result updateFpagePush(@RequestPart("firstpagePush") FirstpagePush firstpagePush,@RequestPart("file")  MultipartFile file, HttpServletRequest request) throws IOException {
+    public Result updateFpagePush(@RequestPart("firstpagePush") FirstpagePush firstpagePush,@RequestPart("file") MultipartFile file,HttpServletRequest request) throws IOException {
         if (file.isEmpty()){
             return new Result(400,"图片为空");
         }
+        System.out.println(firstpagePush.getTitle());
         return adminService.updateFpp(firstpagePush,file,request);
     }
 

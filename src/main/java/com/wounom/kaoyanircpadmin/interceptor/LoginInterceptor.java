@@ -42,7 +42,6 @@ public class LoginInterceptor implements HandlerInterceptor {
             String token = request.getHeader("token");
             if (ObjectUtils.isEmpty(token)){
                 Result result = new Result("400","登录超时或无效token");
-
                 response.setContentType("text/html;charset=UTF-8");
                 response.getWriter().write(result.toString());
                 response.getWriter().flush();
@@ -52,6 +51,11 @@ public class LoginInterceptor implements HandlerInterceptor {
             if (TokenUtils.verfiry(token)){//验证token
                 return true;
             }else {
+                Result result = new Result("400","登录超时或无效token");
+                response.setContentType("text/html;charset=UTF-8");
+                response.getWriter().write(result.toString());
+                response.getWriter().flush();
+                response.getWriter().close();
                 return false;
             }
         }

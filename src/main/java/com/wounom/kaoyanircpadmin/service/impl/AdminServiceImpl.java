@@ -106,14 +106,18 @@ public class AdminServiceImpl implements AdminService {
             FileUtil.deleteFile(filePath);
         }
             String newFn = FileUtil.saveFile(file,path);
-            String url = request.getScheme()+"://"+ip+"/images/firstpage/"+newFn;
+            String url = request.getScheme()+"://"+ip+":8080"+"/images/firstpage/"+newFn;
             String imgPath = path+newFn;
             firstpagePush.setCreate_Time(DateTime.now());
             firstpagePush.setImage(url);
             firstpagePush.setImagePath(imgPath);
-            adminMapper.updateFpp(firstpagePush);
-            return new Result(200,"上传成功",1,url);
-
+            int r = adminMapper.updateFpp(firstpagePush);
+            if (r>0){
+                return new Result(200,"上传成功",1,url);
+            }
+            else {
+                return new Result(400,"上传失败",0,r);
+            }
     }
 
     /**

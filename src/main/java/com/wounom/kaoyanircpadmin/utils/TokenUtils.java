@@ -56,7 +56,9 @@ public class TokenUtils {
 
     // TOKEN 验证
     public static Boolean verfiry(String token){
-
+        if(TokenUtils.getAdmin(token)==null){
+            return false;
+        }
         try {
             JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(TOKEN_SECRET))
                     .withIssuer("litind")
