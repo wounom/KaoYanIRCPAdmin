@@ -24,14 +24,11 @@
     </update>
 
     <update id="updateFpp">
-        update firstpage_push set title = #{title},create_time = #{create_Time},URL = #{url}, imagepath = #{imagePath}, image = #{image} where first_id = #{first_Id}
+        update firstpage_push set title = #{title},createTime = #{createTime},URL = #{url}, imagepath = #{imagepath}, image = #{image} where firstId = #{firstId}
     </update>
 
-    <update id="deleteFppById">
-        update firstpage_push set title = null,create_time =null ,URL = null, image = null, imagepath = null where first_id = #{first_Id}
-    </update>
 
     <select id="selectFppById" resultType="com.wounom.kaoyanircpadmin.entity.FirstpagePush">
-        select * from firstpage_push where first_id = #{first_Id}
+        select * from firstpage_push where firstId = #{firstId}
     </select>
 </mapper>

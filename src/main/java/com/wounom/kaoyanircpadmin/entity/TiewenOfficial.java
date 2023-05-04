@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -43,7 +44,7 @@ public class TiewenOfficial  implements Serializable {
 	 * 贴文创建时间
 	 */
 	@ApiModelProperty(value = "贴文创建时间")
-	private DateTime createTime;
+	private LocalDateTime createTime;
 
 	/**
 	 * 贴文内容

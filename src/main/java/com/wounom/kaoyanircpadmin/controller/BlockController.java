@@ -1,6 +1,7 @@
 package com.wounom.kaoyanircpadmin.controller;
 
 
+import com.wounom.kaoyanircpadmin.entity.Block;
 import com.wounom.kaoyanircpadmin.entity.Result;
 import com.wounom.kaoyanircpadmin.service.BlockService;
 import io.swagger.annotations.ApiOperation;
@@ -37,17 +38,33 @@ public class BlockController {
     /**
      *
      * 删除板块 (管理员删除板块)
-     * @param status ,blockName
+     * @param status , blockName
      * @return
      * @author litind
      **/
     @DeleteMapping("/delete")
     @ApiOperation("删除板块，记得去TiewenController删除板块内数据(status ,blockName)")
     public Result deleteBlock(@RequestParam("status") int status,@RequestParam("blockName") String blockName){
-        if(status == 1 || status == 2){
+        if(status == 0){
             return  new Result(400,"官方必要板块，不允许删除");
         } else{ //删除院校板块
            return  blockService.deleteBlock(blockName);
         }
+    }
+
+    /**
+     *
+     * 新增板块
+     * @param block
+     * @return
+     * @author litind
+     **/
+    @PostMapping("/new")
+    @ApiOperation("新增板块")
+    public Result newBlock(@RequestBody Block block){
+        if (block.getStatus()==0){
+            return new Result(400,"不允许再新增官方板块");
+        }
+        return blockService.newBlock(block);
     }
 }

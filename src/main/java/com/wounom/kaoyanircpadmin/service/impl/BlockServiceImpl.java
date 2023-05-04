@@ -2,6 +2,7 @@ package com.wounom.kaoyanircpadmin.service.impl;
 
 
 
+import cn.hutool.core.date.DateTime;
 import com.wounom.kaoyanircpadmin.mapper.BlockMapper;
 import com.wounom.kaoyanircpadmin.entity.Block;
 import com.wounom.kaoyanircpadmin.entity.Result;
@@ -36,6 +37,18 @@ public class BlockServiceImpl implements BlockService {
         int r = blockMapper.deleteBlock(blockName);
         if (r>0){
             return new Result(200,"删除成功");
+        }else{
+            return new Result(400,"系统错误");
+        }
+    }
+
+    @Override
+    public Result newBlock(Block block) {
+        block.setBlockTime(DateTime.now());
+        System.out.println(block.getBlockName());
+        int r= blockMapper.addBlock(block);
+        if (r>0){
+            return new Result(200,"增加成功");
         }else{
             return new Result(400,"系统错误");
         }

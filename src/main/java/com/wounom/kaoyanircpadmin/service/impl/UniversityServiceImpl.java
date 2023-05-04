@@ -71,7 +71,13 @@ public class UniversityServiceImpl implements UniversityService {
      **/
     @Override
     public Result getUniversityByDistrict(String universityDistrict) {
-        List<University> universities = universityMapper.getByDistrict(universityDistrict);
+        List<University> universities = null;
+        if(universityDistrict.equals("全部")){
+            universities = universityMapper.getAll();
+        }else {
+           universities = universityMapper.getByDistrict(universityDistrict);
+        }
+
         if (universities.isEmpty()){
             return new Result(400,"该地区不存在或地区暂无院校信息");
         }else {

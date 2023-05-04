@@ -18,4 +18,6 @@ public interface BlockMapper {
     List<Block> getBlock();
 
     int deleteBlock(String blockName);
+
+    int addBlock(Block block);
 }

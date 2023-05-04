@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -104,7 +105,6 @@ public class TieWenServiceImpl implements TieWenService {
         }
     }
 
-
     /**
      *
      * 通过板块名称获取贴文
@@ -131,6 +131,7 @@ public class TieWenServiceImpl implements TieWenService {
             }
         }
     }
+
     /**
      *
      * 管理员删除贴文
@@ -152,6 +153,7 @@ public class TieWenServiceImpl implements TieWenService {
             return new Result(400,"删除失败");
         }
     }
+
     /**
      *
      * 发布官方贴文
@@ -161,17 +163,18 @@ public class TieWenServiceImpl implements TieWenService {
      **/
     @Override
     public Result pushOfficialTie(int i , TiewenOfficial tiewenOfficial, HttpServletRequest request) {
+        String token = request.getHeader("token");
+        Admin admin = TokenUtils.getAdmin(token);
         int r = 0;
         if (i==0){//官方帖子
-            tiewenOfficial.setCreateTime(DateTime.now());
-            String token = request.getHeader("token");
-            Admin admin = TokenUtils.getAdmin(token);
+            tiewenOfficial.setCreateTime(LocalDateTime.now());
             Long id =admin.getAdminId();
             tiewenOfficial.setAdminId(id);
             r = tieWenMapper.insertTiewenOfficial(tiewenOfficial);
         }else{
             Tiewen tiewen = new Tiewen();
             tiewen.setUserId(000L);
+            tiewen.setUsername("admin-"+admin.getAdminId());
             tiewen.setCreateTime(DateTime.now());
             tiewen.setTitle(tiewenOfficial.getTitle());
             tiewen.setContent(tiewenOfficial.getContent());

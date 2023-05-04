@@ -18,4 +18,8 @@
     <delete id="deleteBlock">
         delete from block where blockName = #{blockName}
     </delete>
+
+    <insert id="addBlock">
+        insert into block (blockName,blockTime,status) values(#{blockName},#{blockTime},#{status})
+    </insert>
 </mapper>

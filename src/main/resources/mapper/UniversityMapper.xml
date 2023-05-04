@@ -31,6 +31,10 @@
         select * from university where universityDistrict = #{universityDistrict}
     </select>
 
+    <select id="getAll" resultType="com.wounom.kaoyanircpadmin.entity.University">
+        select * from university
+    </select>
+
     <select id="getById" resultType="com.wounom.kaoyanircpadmin.entity.University">
         select * from university where universityId = #{universityId}
     </select>

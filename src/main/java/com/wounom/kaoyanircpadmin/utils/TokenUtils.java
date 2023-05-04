@@ -7,6 +7,8 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.wounom.kaoyanircpadmin.entity.Admin;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +34,7 @@ public class TokenUtils {
             Date expire = new Date(System.currentTimeMillis() + EXPIRE_TIME);
             token = JWT.create()
                     .withIssuer("litind")  //发行人
-                    .withClaim("adminId", admin.getAdminId()) //存放数据
+                    .withClaim("adminId",admin.getAdminId()) //存放数据
                     .withExpiresAt(expire) //过期时间
                     .sign(Algorithm.HMAC256(TOKEN_SECRET));//加密方式
         }catch (Exception e){
@@ -43,20 +45,25 @@ public class TokenUtils {
     }
 
     //缓存已经登录的账户
-    static void saveAdmin(String token,Admin admin){
-        Admin a = tokenMap.get(token);
-        if (a==null){
+    static void saveAdmin(String token, Admin admin){
+
+        Collection<Admin> collect = tokenMap.values();
+
+        if (collect.contains(admin)==false){
             tokenMap.put(token,admin);
+
         }else {
             //当用户重新登录的时候，先将缓存中的token去掉，再存入新的token
-            tokenMap.remove(token);
+            collect.remove(admin);
+
             tokenMap.put(token,admin);
         }
     }
 
     // TOKEN 验证
     public static Boolean verfiry(String token){
-        if(TokenUtils.getAdmin(token)==null){
+        Admin admin = TokenUtils.getAdmin(token);
+        if(admin==null){
             return false;
         }
         try {
@@ -67,7 +74,6 @@ public class TokenUtils {
             log.info("TOKEN 验证通过");
             log.info("adminId :"+ decodedJWT.getClaim("adminId"));
             log.info("过期时间："+ decodedJWT.getExpiresAt());
-            System.out.println(decodedJWT.getClaim("user"));
         }catch (Exception e){
             // 抛出错误即为验证不通过
             log.error("TOKEN 验证不通过,请再次输入");
@@ -85,6 +91,17 @@ public class TokenUtils {
         User user = (User) decodedJWT.getClaim("user");*/
         Admin admin = tokenMap.get(token);
         return admin;
+    }
+
+    //登出时使用该方法删除服务器缓存中的token
+    //防止已登出的用户使用登出前的token恶意操作
+    public static boolean removeToken(String token) {
+        try {
+            tokenMap.remove(token);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
 

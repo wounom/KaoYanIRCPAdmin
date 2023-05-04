@@ -48,6 +48,6 @@
     </insert>
 
     <insert id="insertTiewen">
-        insert into tiewen(userId,title,createTime,content,blockName,status) values (#{userId},#{title},#{createTime},#{content},#{blockName},#{status})
+        insert into tiewen(userId,username,title,createTime,content,blockName,status) values (#{userId},#{username},#{title},#{createTime},#{content},#{blockName},#{status})
     </insert>
 </mapper>

@@ -2,8 +2,8 @@ package com.wounom.kaoyanircpadmin.entity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
@@ -12,14 +12,14 @@ import java.util.Date;
 /**
  * @Description  
  * @Author  zhf
- * @Date 2023-04-05 
+ * @Date 2023-05-03 
  */
 
 @ApiModel(value = "tiewen")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Tiewen implements Serializable {
+public class Tiewen  implements Serializable {
 
 
 	/**
@@ -33,6 +33,12 @@ public class Tiewen implements Serializable {
 	 */
 	@ApiModelProperty(value = "用户id")
 	private Long userId;
+
+	/**
+	 * 用户名
+	 */
+	@ApiModelProperty(value = "用户名")
+	private String username;
 
 	/**
 	 * 标题

@@ -24,7 +24,7 @@ public interface AdminMapper{
 
     int updateFpp(FirstpagePush firstpagePush);
 
-    int deleteFppById(int firstId);
+    int deleteFppById(FirstpagePush firstpagePush);
 
     FirstpagePush selectFppById(int first_Id);
 

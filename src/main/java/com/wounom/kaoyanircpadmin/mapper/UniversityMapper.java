@@ -22,4 +22,6 @@ public interface UniversityMapper {
     List<University> getByDistrict(String universityDistrict);
     University getById(Long id);
     int update(University university);
+
+    List<University> getAll();
 }

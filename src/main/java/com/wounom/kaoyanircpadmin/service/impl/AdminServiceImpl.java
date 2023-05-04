@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 /**
  * @author litind
@@ -97,20 +98,20 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public  Result updateFpp(FirstpagePush firstpagePush, MultipartFile file, HttpServletRequest request) throws IOException {
         /*String path="D:/JAVA/Project/KaoYanIRCPAdmin/images/firstpage/";*/
-        FirstpagePush fp = adminMapper.selectFppById(firstpagePush.getFirst_Id());
-        if (fp.getImage()!=null) {
+        FirstpagePush fp = adminMapper.selectFppById(firstpagePush.getFirstId());
+        /*if (fp.getImage()!=null) {
             //先将本地存储的图片删除
             String[] str = fp.getImage().split("/");
             String fileName = str[str.length - 1];
             String filePath = path + fileName;
             FileUtil.deleteFile(filePath);
-        }
+        }*/
             String newFn = FileUtil.saveFile(file,path);
             String url = request.getScheme()+"://"+ip+":8080"+"/images/firstpage/"+newFn;
             String imgPath = path+newFn;
-            firstpagePush.setCreate_Time(DateTime.now());
+            firstpagePush.setCreateTime(DateTime.now());
             firstpagePush.setImage(url);
-            firstpagePush.setImagePath(imgPath);
+            firstpagePush.setImagepath(imgPath);
             int r = adminMapper.updateFpp(firstpagePush);
             if (r>0){
                 return new Result(200,"上传成功",1,url);
@@ -123,19 +124,22 @@ public class AdminServiceImpl implements AdminService {
     /**
      *
      * 删除首页推送
-     * @param first_Id
+     * @param firstId
      * @return
      * @author litind
      **/
     @Override
-    public Result deleteFpp(int  first_Id) {
-        FirstpagePush firstpagePush = adminMapper.selectFppById(first_Id);
+    public Result deleteFpp(int firstId) {
+        FirstpagePush firstpagePush = adminMapper.selectFppById(firstId);
         if (firstpagePush==null){
             return new Result(400,"表单为空，请勿重复重置");
         }
-        boolean n =  FileUtil.deleteFile(firstpagePush.getImagePath());
-        System.out.println(n);
-        if(adminMapper.deleteFppById(first_Id)>0){
+        firstpagePush.setUrl("www.wounom.top");
+        firstpagePush.setTitle("KaoYanIRCP");
+        firstpagePush.setImagepath("/www/wwwroot/JAVA/Project/IRCP/images/firstpage/33ba9d4b84234f9690b0f1d1f00725d4.png");
+        firstpagePush.setImage("http://43.138.194.191:8080/images/firstpage/33ba9d4b84234f9690b0f1d1f00725d4.png");
+        firstpagePush.setCreateTime(DateTime.now());
+        if(adminMapper.updateFpp(firstpagePush)>0){
             return new Result(200,"重置成功");
         }else {
             return new Result(400,"重置失败，请联系开发者");

@@ -57,6 +57,25 @@ public class AdminController {
 
     /**
      *
+     * 定期登出管理员账号
+     * @param request
+     * @return
+     * @author litind
+     **/
+    @PostMapping("/logout")
+    @ApiOperation("登出接口")
+    public Result logout(HttpServletRequest request){
+        String token = request.getHeader("token");
+        if(TokenUtils.removeToken(token)){
+            return new Result(200,"登出成功");
+        }
+        else {
+            return new Result(400,"登出失败,系统异常,请联系管理员");
+        }
+    }
+
+    /**
+     *
      * 运维增加管理员
      * 账号，密码
      * @param admin
@@ -90,6 +109,7 @@ public class AdminController {
         return adminService.updateAdmin(admin);
     }
 
+
     /**
      *
      * 上传首页推送
@@ -98,7 +118,7 @@ public class AdminController {
      * @author litind
      **/
     @PostMapping("/Fppush")
-    @ApiOperation("上传首页推送 first_Id,url,file,title")
+    @ApiOperation("上传首页推送 firstId,url,file,title")
     public Result updateFpagePush(@RequestPart("firstpagePush") FirstpagePush firstpagePush,@RequestPart("file") MultipartFile file,HttpServletRequest request) throws IOException {
         if (file.isEmpty()){
             return new Result(400,"图片为空");
@@ -116,10 +136,10 @@ public class AdminController {
      **/
     @PostMapping("/deletepush")
     @ApiOperation("重置首页推送(first_Id)")
-    public Result resetFpagePush(@RequestParam(value = "first_Id") int first_Id){
+    public Result resetFpagePush(@RequestParam(value = "firstId") int firstId){
         /*JSONObject json = JSON.parseObject(String.valueOf(first_Id));
         first_Id = (Integer) json.get("first_Id");*/
-        return adminService.deleteFpp(first_Id);
+        return adminService.deleteFpp(firstId);
     }
 
 }

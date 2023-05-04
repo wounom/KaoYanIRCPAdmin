@@ -2,8 +2,8 @@ package com.wounom.kaoyanircpadmin.entity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
@@ -12,21 +12,21 @@ import java.util.Date;
 /**
  * @Description  
  * @Author  zhf
- * @Date 2023-04-04 
+ * @Date 2023-05-02 
  */
 
 @ApiModel(value = "firstpage_push")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FirstpagePush implements Serializable {
+public class FirstpagePush  implements Serializable {
 
 
 	/**
 	 * 首页贴文id
 	 */
 	@ApiModelProperty(value = "首页贴文id")
-	private int first_Id;
+	private int firstId;
 
 	/**
 	 * 首页贴文标题
@@ -38,7 +38,7 @@ public class FirstpagePush implements Serializable {
 	 * 首页贴文发布时间
 	 */
 	@ApiModelProperty(value = "首页贴文发布时间")
-	private Date create_Time;
+	private Date createTime;
 
 	/**
 	 * 首页贴文内容
@@ -51,14 +51,11 @@ public class FirstpagePush implements Serializable {
 	 */
 	@ApiModelProperty(value = "图片")
 	private String image;
+
 	/**
-	 *
 	 * 图片路径
-	 * @param null
-	 * @return
-	 * @author litind
-	 **/
-	@ApiModelProperty(value = "图片")
-	private String imagePath;
+	 */
+	@ApiModelProperty(value = "图片路径")
+	private String imagepath;
 
 }

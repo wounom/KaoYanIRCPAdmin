@@ -2,6 +2,7 @@ package com.wounom.kaoyanircpadmin.service;
 
 
 
+import com.wounom.kaoyanircpadmin.entity.Block;
 import com.wounom.kaoyanircpadmin.entity.Result;
 
 /**
@@ -14,4 +15,6 @@ public interface BlockService {
     Result deleteBlock(String blockName);
 
     Result getBlock();
+
+    Result newBlock(Block block);
 }
