@@ -135,7 +135,7 @@ public class AdminController {
      * @author litind
      **/
     @PostMapping("/deletepush")
-    @ApiOperation("重置首页推送(first_Id)")
+    @ApiOperation("重置首页推送(firstId)")
     public Result resetFpagePush(@RequestParam(value = "firstId") int firstId){
         /*JSONObject json = JSON.parseObject(String.valueOf(first_Id));
         first_Id = (Integer) json.get("first_Id");*/

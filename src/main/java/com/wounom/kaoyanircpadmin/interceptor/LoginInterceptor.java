@@ -1,6 +1,8 @@
 package com.wounom.kaoyanircpadmin.interceptor;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.wounom.kaoyanircpadmin.entity.Result;
 import com.wounom.kaoyanircpadmin.utils.TokenUtils;
 import org.springframework.http.HttpStatus;
@@ -41,9 +43,11 @@ public class LoginInterceptor implements HandlerInterceptor {
             //token验证
             String token = request.getHeader("token");
             if (ObjectUtils.isEmpty(token)){
-                Result result = new Result("400","登录超时或无效token");
-                response.setContentType("text/html;charset=UTF-8");
-                response.getWriter().write(result.toString());
+                Result result = new Result(401,"登录超时或无效token",0,null);
+                JSONObject resultJson = (JSONObject) JSON.toJSON(result);
+                //response.setContentType("text/html;charset=UTF-8");
+                response.setContentType("application/json;charset=UTF-8");
+                response.getWriter().write(String.valueOf(resultJson));
                 response.getWriter().flush();
                 response.getWriter().close();
                 return false;
@@ -51,9 +55,12 @@ public class LoginInterceptor implements HandlerInterceptor {
             if (TokenUtils.verfiry(token)){//验证token
                 return true;
             }else {
-                Result result = new Result("400","登录超时或无效token");
-                response.setContentType("text/html;charset=UTF-8");
-                response.getWriter().write(result.toString());
+                Result result = new Result(401,"登录超时或无效token",0,null);
+                JSONObject resultJson = (JSONObject) JSON.toJSON(result);
+                //response.setContentType("text/html;charset=UTF-8");
+                response.setContentType("application/json;charset=UTF-8");
+                //response.getWriter().write(result.toString());
+                response.getWriter().write(String.valueOf(resultJson));
                 response.getWriter().flush();
                 response.getWriter().close();
                 return false;
