@@ -28,7 +28,7 @@
     </delete>
     
     <select id="getTieByBlock" resultType="com.wounom.kaoyanircpadmin.entity.Tiewen">
-        select * from tiewen where blockName = #{blockName}
+        select * from tiewen where blockName = #{blockName} AND status = 1
     </select>
     
     <select id="getTieOfByBlock" resultType="com.wounom.kaoyanircpadmin.entity.TiewenOfficial">

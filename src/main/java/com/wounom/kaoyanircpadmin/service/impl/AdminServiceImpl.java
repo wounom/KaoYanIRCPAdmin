@@ -134,10 +134,10 @@ public class AdminServiceImpl implements AdminService {
         if (firstpagePush==null){
             return new Result(400,"表单为空，请勿重复重置");
         }
-        firstpagePush.setUrl("www.wounom.top");
-        firstpagePush.setTitle("KaoYanIRCP");
+        firstpagePush.setUrl("http://www.wounom.top/#/home");
+        firstpagePush.setTitle("考研发布及信息交流平台欢迎您");
         firstpagePush.setImagepath("/www/wwwroot/JAVA/Project/IRCP/images/firstpage/33ba9d4b84234f9690b0f1d1f00725d4.png");
-        firstpagePush.setImage("http://43.138.194.191:8080/images/firstpage/33ba9d4b84234f9690b0f1d1f00725d4.png");
+        firstpagePush.setImage("http://175.178.227.53:8080/images/firstpage/33ba9d4b84234f9690b0f1d1f00725d4.png");
         firstpagePush.setCreateTime(DateTime.now());
         if(adminMapper.updateFpp(firstpagePush)>0){
             return new Result(200,"重置成功");
